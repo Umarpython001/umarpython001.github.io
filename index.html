@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Olowonyo Umar Ololade — Portfolio</title>
+  <style>
+    /* ==========================
+       Palette & base variables
+       ========================== */
+    :root{
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --muted: #f0f3fb;
+      --accent-1: #1e90ff;   /* blue */
+      --accent-2: #7b61ff;   /* purple */
+      --accent-3: #ff9f43;   /* warm accent */
+      --text: #222;
+      --soft-shadow: 0 8px 24px rgba(18, 30, 50, 0.08);
+      --card-radius: 14px;
+      --max-width: 980px;
+    }
+
+    /* --------------------------
+       Page reset / typography
+       -------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg) 0%, #eef4ff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding-bottom:64px;
+    }
+
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:28px;
+    }
+
+    /* ==========================
+       Header
+       ========================== */
+    header{
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color:white;
+      border-bottom-left-radius: 22px;
+      border-bottom-right-radius: 22px;
+      padding:48px 0 88px; /* extra bottom space so top avatar overlaps nicely */
+      box-shadow: 0 6px 30px rgba(30, 41, 60, 0.15);
+    }
+
+    header .container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+
+    header h1{
+      margin:0;
+      font-size:clamp(28px, 4.2vw, 42px);
+      letter-spacing: -0.5px;
+      text-align:center;
+      text-shadow: 0 6px 18px rgba(30,30,60,0.15);
+    }
+
+    header p.lead{
+      margin:0;
+      opacity:0.95;
+      font-weight:500;
+    }
+
+    /* ==========================
+       Profile circular image & About card (overlapping)
+       ========================== */
+    .profile-top{
+      display:flex;
+      justify-content:center;
+      position:relative;
+      margin-top:-72px; /* pull up into header for overlap */
+      z-index:5;
+    }
+
+    .avatar-circle{
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      overflow:hidden;
+      border:6px solid rgba(255,255,255,0.95);
+      box-shadow: 0 20px 40px rgba(30,40,60,0.18);
+      background-size:cover;
+      background-position:center;
+      transform:translateY(10px);
+    }
+
+    /* ==========================
+       Main sections: staged / staggered layout
+       ========================== */
+    main{ padding-top:10px; }
+    /* Each section (.stage) alternates background color and has a centered card (.section-box) */
+    .stage{
+      padding:28px 0;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* Alternate subtle backgrounds for rhythm */
+    main > .stage:nth-of-type(odd)  { background: transparent; }
+    main > .stage:nth-of-type(even) { background: linear-gradient(180deg, rgba(123,97,255,0.03), rgba(30,144,255,0.01)); }
+
+    .section-box{
+      width:100%;
+      max-width:880px;
+      background:var(--card);
+      border-radius:var(--card-radius);
+      box-shadow:var(--soft-shadow);
+      padding:28px;
+      transform:translateY(26px);
+      opacity:0;
+      border: 1px solid rgba(20,20,40,0.03);
+    }
+
+    .section-box h2{
+      margin-top:0;
+      margin-bottom:14px;
+      font-size:1.25rem;
+      letter-spacing:-0.2px;
+      position:relative;
+      display:inline-block;
+    }
+
+    .section-box h2::after{
+      content:"";
+      height:4px;
+      width:48px;
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      display:block;
+      margin-top:10px;
+      border-radius:6px;
+    }
+
+    .section-box p { margin:0 0 12px 0; color:#333; }
+
+    /* ==========================
+       Rectangular mid-page photo
+       ========================== */
+    .photo-rect{
+      width:100%;
+      max-width:880px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(20,30,60,0.12);
+      background:linear-gradient(180deg,#eef6ff,#ffffff);
+      border:1px solid rgba(36,60,120,0.03);
+      transform:translateX(-40px);
+      opacity:0;
+    }
+    .photo-rect img{
+      width:100%;
+      display:block;
+      height:auto;
+    }
+    .photo-caption{
+      padding:14px 18px;
+    }
+
+    /* ==========================
+       Skills list, badges & projects styling
+       ========================== */
+    .skills-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:6px;
+    }
+    .badge{
+      background:linear-gradient(180deg, rgba(30,144,255,0.06), rgba(123,97,255,0.03));
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      border:1px solid rgba(30,30,60,0.04);
+      box-shadow: 0 6px 16px rgba(11,22,60,0.04);
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+    .project-card{
+      background:linear-gradient(180deg, #fff, #fafcff);
+      border-radius:12px;
+      padding:14px;
+      box-shadow: 0 8px 20px rgba(12,20,40,0.04);
+      border:1px solid rgba(20,20,40,0.03);
+    }
+    .project-card h3{ margin:0 0 8px 0; font-size:1rem; }
+    .project-card p{ margin:0; font-size:0.95rem; color:#444; }
+
+    /* ==========================
+       Animation keyframes
+       ========================== */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity:0; transform:translateX(-36px) translateY(6px); }
+      to   { opacity:1; transform:translateX(0) translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity:0; transform:translateX(36px) translateY(6px); }
+      to   { opacity:1; transform:translateX(0) translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity:0; transform:scale(.96); }
+      to   { opacity:1; transform:scale(1); }
+    }
+
+    /* ==========================
+       Stagger control (no JS) — animations run on page load, staggered by section order
+       If you want to change timing, edit the delays below
+       ========================== */
+    main > .stage:nth-of-type(1) .section-box { animation: fadeUp 700ms cubic-bezier(.2,.9,.2,1) 120ms both; }
+    main > .stage:nth-of-type(2) .photo-rect    { animation: fadeLeft 760ms cubic-bezier(.2,.9,.2,1) 320ms both; }
+    main > .stage:nth-of-type(3) .section-box { animation: fadeRight 760ms cubic-bezier(.2,.9,.2,1) 520ms both; }
+    main > .stage:nth-of-type(4) .section-box { animation: popIn 640ms cubic-bezier(.2,.9,.2,1) 720ms both; transform-origin:center; }
+    main > .stage:nth-of-type(5) .section-box { animation: fadeUp 760ms cubic-bezier(.2,.9,.2,1) 920ms both; }
+    main > .stage:nth-of-type(6) .section-box { animation: fadeLeft 760ms cubic-bezier(.2,.9,.2,1) 1120ms both; }
+    /* If more stages are added, add more nth-of-type rules above for stagger */
+
+    /* ==========================
+       Vertical staggering (each stage "hangs" slightly lower)
+       You can tweak values below — they create that layered cascade look
+       ========================== */
+    main > .stage:nth-of-type(1){ margin-top: 8px; }
+    main > .stage:nth-of-type(2){ margin-top: 18px; }
+    main > .stage:nth-of-type(3){ margin-top: 28px; }
+    main > .stage:nth-of-type(4){ margin-top: 36px; }
+    main > .stage:nth-of-type(5){ margin-top: 44px; }
+    main > .stage:nth-of-type(6){ margin-top: 56px; }
+
+    /* ==========================
+       Footer
+       ========================== */
+    footer{
+      margin-top: 28px;
+      background: linear-gradient(135deg, rgba(10,10,30,0.96), rgba(34,34,68,0.98));
+      color: #fff;
+      padding:22px 0;
+      border-top-left-radius:18px;
+      border-top-right-radius:18px;
+      box-shadow: 0 -8px 30px rgba(10,10,30,0.25);
+    }
+    footer nav ul{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      list-style:none;
+      padding:0;
+      margin:6px 0 0 0;
+    }
+    footer nav a{
+      color:#dfe9ff;
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 10px;
+      border-radius:8px;
+      transition:all .18s ease;
+    }
+    footer nav a:hover{ transform:translateY(-3px); color: white; text-shadow: 0 8px 24px rgba(123,97,255,0.16); }
+
+    /* ==========================
+       Responsive tweaks
+       ========================== */
+    @media (max-width:880px){
+      .container{ padding:18px; }
+      header{ padding-bottom:84px; }
+      .avatar-circle{ width:120px; height:120px; border-width:5px; }
+      .section-box{ padding:18px; border-radius:12px; }
+      .projects-grid{ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    }
+
+    /* ==========================
+       Accessibility: reduce motion
+       ========================== */
+    @media (prefers-reduced-motion: reduce){
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      .section-box, .photo-rect { opacity:1; transform:none; }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Olowonyo Umar</h1>
+      <p class="lead">A curious problem solver — Python, web parsing, GUIs, and creative projects.</p>
+
+      <!-- circular avatar on top (overlap) -->
+      <div class="profile-top" aria-hidden="true">
+        <!-- Replace the background-image URL/path below with your local path or hosted image -->
+        <div class="avatar-circle" style="background-image: url('C:/Users/Olowonyo/Downloads/avtr.jfif');"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. About Me (stage 1) -->
+    <section class="stage">
+      <article class="section-box" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores id esse sequi porro nihil eos numquam eveniet magni nulla natus, harum enim laboriosam distinctio.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum excepturi ab corrupti unde omnis. Ipsam illo debitis vel quasi nesciunt architecto, esse aliquid aut!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, esse aspernatur tempore optio dolores nam veniam autem quaerat deleniti.
+        </p>
+      </article>
+    </section>
+
+    <!-- 2. Rectangular Photo (stage 2) -->
+    <section class="stage" aria-hidden="false">
+      <div class="photo-rect" role="img" aria-label="Second profile image">
+        <!-- Replace src with your second image path -->
+        <img src="super black panther.jpg" alt="Rectangular profile preview", style="height: 12cm; width: 10cm;">
+        <div class="photo-caption">
+          <strong>Snapshot Project</strong>
+          <p style="margin:6px 0 0 0; color:#3b3b3b;">A mid-page image to add visual depth — replace with a project screenshot or a portrait.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Skills and Abilities (stage 3) -->
+    <section class="stage">
+      <article class="section-box" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills & Abilities</h2>
+
+        <div style="display:flex; gap:18px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:220px;">
+            <ul style="padding:0; margin:0; list-style:none;">
+              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
+                <strong>Python</strong>
+                <div style="font-size:.92rem; margin-top:6px; color:#444;">
+                  • Web parsing with Beautiful Soup<br>
+                  • Desktop apps with tkinter<br>
+                  • RESTful APIs
+                </div>
+              </li>
+              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
+                <strong>Web</strong>
+                <div style="font-size:.92rem; color:#444;">HTML, CSS, responsive layouts</div>
+              </li>
+            </ul>
+          </div>
+
+          <div style="flex:1; min-width:220px;">
+            <ul style="padding:0; margin:0; list-style:none;">
+              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
+                <strong>Tools</strong>
+                <div style="font-size:.92rem; color:#444;">Git, VS Code, CLI basics</div>
+              </li>
+              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
+                <strong>Problem Solving</strong>
+                <div style="font-size:.92rem; color:#444;">Algorithms, debugging, creative hacks</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+    </section>
+
+    <!-- 4. Tools I Use (stage 4) -->
+    <section class="stage">
+      <article class="section-box" aria-labelledby="tools-heading">
+        <h2 id="tools-heading">Tools I Use</h2>
+
+        <div class="skills-list" aria-hidden="false" style="margin-top:8px;">
+          <span class="badge">Python</span>
+          <span class="badge">Beautiful Soup</span>
+          <span class="badge">tkinter</span>
+          <span class="badge">HTML</span>
+          <span class="badge">CSS</span>
+          <span class="badge">Git</span>
+          <span class="badge">VS Code</span>
+          <span class="badge">REST APIs</span>
+        </div>
+
+      </article>
+    </section>
+
+    <!-- 5. Mission / Currently Learning (stage 5) -->
+    <section class="stage">
+      <article class="section-box" aria-labelledby="mission-heading">
+        <h2 id="mission-heading">Mission — What I'm Currently Learning</h2>
+        <p><strong>Currently exploring:</strong> data science, full-stack web development, and automation tools.</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor.
+        </p>
+        <p>I'll replace this placeholder with more specific goals and projects soon.</p>
+      </article>
+    </section>
+
+    <!-- 6. Projects (stage 6) -->
+    <section class="stage">
+      <article class="section-box" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects Made</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>Portfolio Website</h3>
+            <p>Built with plain HTML and CSS — easy to customize and lightweight.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>Sudoku Solver</h3>
+            <p>Python recursive backtracking solver to auto-solve puzzles quickly.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>Web Parser</h3>
+            <p>A Beautiful Soup-based scraper to extract data from messy web pages.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>To-do App (tkinter)</h3>
+            <p>A local GUI app to manage tasks with save/load functionality.</p>
+          </div>
+        </div>
+
+      </article>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="text-align:center;">
+      <small style="opacity:0.9;">© <strong>Olowonyo Umar Ololade</strong> — 2025</small>
+      <nav aria-label="Social links" style="margin-top:8px;">
+        <ul>
+          <li><a href="https://github.com/Umarpython001">GitHub</a></li>
+          <li><a href="about.html">Discord</a></li>
+          <li><a href="contact.html">YouTube</a></li>
+          <li><a href="mission.html">TikTok</a></li>
+          <li><a href="achievements.html">Mail</a></li>
+          <li><a href="achievements.html">Amala</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
