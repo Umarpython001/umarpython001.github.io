@@ -1,469 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Olowonyo Umar Ololade — Portfolio</title>
-  <style>
-    /* ==========================
-       Palette & base variables
-       ========================== */
-    :root{
-      --bg: #f4f7f6;
-      --card: #ffffff;
-      --muted: #f0f3fb;
-      --accent-1: #1e90ff;   /* blue */
-      --accent-2: #7b61ff;   /* purple */
-      --accent-3: #ff9f43;   /* warm accent */
-      --text: #222;
-      --soft-shadow: 0 8px 24px rgba(18, 30, 50, 0.08);
-      --card-radius: 14px;
-      --max-width: 980px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website Test</title>
+    <style>
 
-    /* --------------------------
-       Page reset / typography
-       -------------------------- */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color:var(--text);
-      background: linear-gradient(180deg, var(--bg) 0%, #eef4ff 100%);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      padding-bottom:64px;
-    }
+        main section h2{
+        margin-top:0;
+        margin-bottom:14px;
+        /* color: brown; */
+        font-size:1.25rem;
+        letter-spacing:-0.2px;
+        position:relative;
+        display:inline-block;
+        }
 
-    .container{
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:28px;
-    }
+        main #main-container .section-box{
+        width:100%;
+        background:var(--card);
+        border-radius:0.55cm;
+        background-color: white;
+        box-shadow: 25px -5px 5px cyan;
+        padding:28px;
+        /* transform:translateY(26px); */
+        opacity:1;
+        }
 
-    /* ==========================
-       Header
-       ========================== */
-    header{
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-      color:white;
-      border-bottom-left-radius: 22px;
-      border-bottom-right-radius: 22px;
-      padding:48px 0 88px; /* extra bottom space so top avatar overlaps nicely */
-      box-shadow: 0 6px 30px rgba(30, 41, 60, 0.15);
-    }
 
-    header .container{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-    }
+        main #main-container .section-box:hover{
+            box-shadow: 55px -55px 5px rgb(0, 255, 255);
+            background-color: rgb(196, 235, 255);
+            /* font-size: x-large; */
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+        }
 
-    header h1{
-      margin:0;
-      font-size:clamp(28px, 4.2vw, 42px);
-      letter-spacing: -0.5px;
-      text-align:center;
-      text-shadow: 0 6px 18px rgba(30,30,60,0.15);
-    }
+        main{
+            animation-name: maincomeup;
+            animation-duration: 2s;
+        }
 
-    header p.lead{
-      margin:0;
-      opacity:0.95;
-      font-weight:500;
-    }
+        
+        @keyframes headcomeup{
+            from{transform: translateY(-100px);}
+        }
 
-    /* ==========================
-       Profile circular image & About card (overlapping)
-       ========================== */
-    .profile-top{
-      display:flex;
-      justify-content:center;
-      position:relative;
-      margin-top:-72px; /* pull up into header for overlap */
-      z-index:5;
-    }
+        @keyframes maincomeup{
+            from{transform: translateX(-100px); opacity: 0;}
+        }
 
-    .avatar-circle{
-      width:150px;
-      height:150px;
-      border-radius:50%;
-      overflow:hidden;
-      border:6px solid rgba(255,255,255,0.95);
-      box-shadow: 0 20px 40px rgba(30,40,60,0.18);
-      background-size:cover;
-      background-position:center;
-      transform:translateY(10px);
-    }
+        @keyframes footercomeup{
+            from{transform: translate(-700px, -100px); opacity: 0;}
+        }
 
-    /* ==========================
-       Main sections: staged / staggered layout
-       ========================== */
-    main{ padding-top:10px; }
-    /* Each section (.stage) alternates background color and has a centered card (.section-box) */
-    .stage{
-      padding:28px 0;
-      display:flex;
-      justify-content:center;
-    }
+        @keyframes headerimagemove{
+            from{transform: translateX(-90px); opacity: 0;}
+        }
 
-    /* Alternate subtle backgrounds for rhythm */
-    main > .stage:nth-of-type(odd)  { background: transparent; }
-    main > .stage:nth-of-type(even) { background: linear-gradient(180deg, rgba(123,97,255,0.03), rgba(30,144,255,0.01)); }
+        @keyframes headertextmove{
+            from{transform: translateX(90px); opacity: 0;}
+        }
 
-    .section-box{
-      width:100%;
-      max-width:880px;
-      background:var(--card);
-      border-radius:var(--card-radius);
-      box-shadow:var(--soft-shadow);
-      padding:28px;
-      transform:translateY(26px);
-      opacity:0;
-      border: 1px solid rgba(20,20,40,0.03);
-    }
+        @keyframes connectlinkshovertransformation{
+            50%{transform: scale(1.001);}
+        }
 
-    .section-box h2{
-      margin-top:0;
-      margin-bottom:14px;
-      font-size:1.25rem;
-      letter-spacing:-0.2px;
-      position:relative;
-      display:inline-block;
-    }
+        
+        footer{
+            animation-name: footercomeup;
+            animation-duration: 2s;
+            background-image: url(background_image4.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* border-radius: 2cm; */
+        }
+        
 
-    .section-box h2::after{
-      content:"";
-      height:4px;
-      width:48px;
-      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      display:block;
-      margin-top:10px;
-      border-radius:6px;
-    }
 
-    .section-box p { margin:0 0 12px 0; color:#333; }
+        header{
 
-    /* ==========================
-       Rectangular mid-page photo
-       ========================== */
-    .photo-rect{
-      width:100%;
-      max-width:880px;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow: 0 16px 40px rgba(20,30,60,0.12);
-      background:linear-gradient(180deg,#eef6ff,#ffffff);
-      border:1px solid rgba(36,60,120,0.03);
-      transform:translateX(-40px);
-      opacity:0;
-    }
-    .photo-rect img{
-      width:100%;
-      display:block;
-      height:auto;
-    }
-    .photo-caption{
-      padding:14px 18px;
-    }
 
-    /* ==========================
-       Skills list, badges & projects styling
-       ========================== */
-    .skills-list{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:6px;
-    }
-    .badge{
-      background:linear-gradient(180deg, rgba(30,144,255,0.06), rgba(123,97,255,0.03));
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:600;
-      border:1px solid rgba(30,30,60,0.04);
-      box-shadow: 0 6px 16px rgba(11,22,60,0.04);
-    }
+            background-color: rgb(45, 36, 36); /* semi-transparent overlay */
+            background-blend-mode: overlay;       /* blends the two layers */
+            background-position: center;
 
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
-      gap:16px;
-      margin-top:12px;
-    }
-    .project-card{
-      background:linear-gradient(180deg, #fff, #fafcff);
-      border-radius:12px;
-      padding:14px;
-      box-shadow: 0 8px 20px rgba(12,20,40,0.04);
-      border:1px solid rgba(20,20,40,0.03);
-    }
-    .project-card h3{ margin:0 0 8px 0; font-size:1rem; }
-    .project-card p{ margin:0; font-size:0.95rem; color:#444; }
+            background-image: url(wavy_wave_photo.jpg);
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            padding: 3cm; 
+            padding-top: 2cm;
+            animation-name: headcomeup; 
+            animation-duration: 1s;
+        }
 
-    /* ==========================
-       Animation keyframes
-       ========================== */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(22px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    @keyframes fadeLeft {
-      from { opacity:0; transform:translateX(-36px) translateY(6px); }
-      to   { opacity:1; transform:translateX(0) translateY(0); }
-    }
-    @keyframes fadeRight {
-      from { opacity:0; transform:translateX(36px) translateY(6px); }
-      to   { opacity:1; transform:translateX(0) translateY(0); }
-    }
-    @keyframes popIn {
-      from { opacity:0; transform:scale(.96); }
-      to   { opacity:1; transform:scale(1); }
-    }
+        .badge{
+            display: inline-block;
+            font-size: large;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: cyan;
+            color: var(--bg-dark);
+            padding: 10px 18px;
+            border-radius: 25px;
+            margin: 8px;
+            font-weight: 600;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
 
-    /* ==========================
-       Stagger control (no JS) — animations run on page load, staggered by section order
-       If you want to change timing, edit the delays below
-       ========================== */
-    main > .stage:nth-of-type(1) .section-box { animation: fadeUp 700ms cubic-bezier(.2,.9,.2,1) 120ms both; }
-    main > .stage:nth-of-type(2) .photo-rect    { animation: fadeLeft 760ms cubic-bezier(.2,.9,.2,1) 320ms both; }
-    main > .stage:nth-of-type(3) .section-box { animation: fadeRight 760ms cubic-bezier(.2,.9,.2,1) 520ms both; }
-    main > .stage:nth-of-type(4) .section-box { animation: popIn 640ms cubic-bezier(.2,.9,.2,1) 720ms both; transform-origin:center; }
-    main > .stage:nth-of-type(5) .section-box { animation: fadeUp 760ms cubic-bezier(.2,.9,.2,1) 920ms both; }
-    main > .stage:nth-of-type(6) .section-box { animation: fadeLeft 760ms cubic-bezier(.2,.9,.2,1) 1120ms both; }
-    /* If more stages are added, add more nth-of-type rules above for stagger */
+        .connect_links:hover{
+            transform: translateY(-15px);
+            /* transform: scale(1.001); */
+            
+            border-radius: 10cm;
+            
+        }
 
-    /* ==========================
-       Vertical staggering (each stage "hangs" slightly lower)
-       You can tweak values below — they create that layered cascade look
-       ========================== */
-    main > .stage:nth-of-type(1){ margin-top: 8px; }
-    main > .stage:nth-of-type(2){ margin-top: 18px; }
-    main > .stage:nth-of-type(3){ margin-top: 28px; }
-    main > .stage:nth-of-type(4){ margin-top: 36px; }
-    main > .stage:nth-of-type(5){ margin-top: 44px; }
-    main > .stage:nth-of-type(6){ margin-top: 56px; }
+        .connect_links a h1:hover{
+            color: rgb(255, 80, 80);
+            text-decoration: underline;
+        }
 
-    /* ==========================
-       Footer
-       ========================== */
-    footer{
-      margin-top: 28px;
-      background: linear-gradient(135deg, rgba(10,10,30,0.96), rgba(34,34,68,0.98));
-      color: #fff;
-      padding:22px 0;
-      border-top-left-radius:18px;
-      border-top-right-radius:18px;
-      box-shadow: 0 -8px 30px rgba(10,10,30,0.25);
-    }
-    footer nav ul{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      flex-wrap:wrap;
-      list-style:none;
-      padding:0;
-      margin:6px 0 0 0;
-    }
-    footer nav a{
-      color:#dfe9ff;
-      text-decoration:none;
-      font-weight:600;
-      padding:6px 10px;
-      border-radius:8px;
-      transition:all .18s ease;
-    }
-    footer nav a:hover{ transform:translateY(-3px); color: white; text-shadow: 0 8px 24px rgba(123,97,255,0.16); }
+        #email-address h1:hover{
+            text-decoration: underline;
+            /* font-size: larger; */
+            transform: scale(1.2);
+            /* color: rgb(134, 248, 248); */
+            color: rgb(255, 80, 80);
+        }
 
-    /* ==========================
-       Responsive tweaks
-       ========================== */
-    @media (max-width:880px){
-      .container{ padding:18px; }
-      header{ padding-bottom:84px; }
-      .avatar-circle{ width:120px; height:120px; border-width:5px; }
-      .section-box{ padding:18px; border-radius:12px; }
-      .projects-grid{ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-    }
+        #header-image{
+            height: 13cm; 
+            width: 10cm; 
+            border: 3px solid; 
+            border-radius: 3cm;
+            float: right; 
+            border-color:cyan; 
+            box-shadow: 0 0 30px var(--accent-soft);
+            transform: scale(1);
+            transition: 0.4 ease;
+        }
 
-    /* ==========================
-       Accessibility: reduce motion
-       ========================== */
-    @media (prefers-reduced-motion: reduce){
-      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-      .section-box, .photo-rect { opacity:1; transform:none; }
-    }
+        #header-image:hover{
+            border-color:rgb(0, 238, 255); 
+            transform: scale(1.1);
+            box-shadow: 5px 5px 15px cyan, -5px -5px 15px cyan;
+        }
+        
+        .headerintrotext{
+            text-align: left;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation-name: headertextmove;
+            animation-duration: 2s;
+        }
 
-  </style>
+        #hellothere{
+            text-align: left; 
+            color: hsl(187, 100%, 50%); 
+            font-size: 1.75em;
+        }
+
+        #brief_intro_text{
+            text-align: left; 
+            color: white;
+        }
+
+        .different-section-headers{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: left;
+            font-size: 2.2em;
+        }
+
+        #nomovenavbar{
+            background-color: rgb(244, 158, 0);
+            padding: 1cm;
+            position: fixed;
+            width: 100%;
+            height: 7%;
+        }
+
+        .topnavlink{
+            padding: 20px;
+            font-size: x-large;
+            background-color: rgb(0, 0, 0);
+            border-radius: 2cm;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .topnavlink:hover{
+            background-color: rgb(78, 237, 237);
+            color: black;
+            box-shadow: 2px 2px 5px cyan, -2px -2px 5px cyan;
+        }
+
+        #form{
+            text-align: center;
+        }
+
+        
+        .forminputs{
+            width: 15cm;
+            height: 1cm;
+            border-radius: 2cm;
+            font-size: 1.7em;
+            border: 5px solid cyan;
+            
+        }
+
+        .formlabels{
+            font-size: 1.5em;
+            
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <h1>Olowonyo Umar Ololade</h1>
-      <p class="lead">A curious problem solver — Python, web parsing, GUIs, and creative projects.</p>
 
-      <!-- circular avatar on top (overlap) -->
-      <div class="profile-top" aria-hidden="true">
-        <!-- Replace the background-image URL/path below with your local path or hosted image -->
-        <div class="avatar-circle" style="background-image: url('C:/Users/Olowonyo/Downloads/avtr.jfif');"></div>
-      </div>
+<body style="margin: 0;">
+
+    <div style="height: 0cm;"> 
+        <nav id="nomovenavbar" style="text-align: left;">
+                <ul>
+                    <a href="#Home" class="topnavlink">Home</a>
+                    <a href="#About_me" class="topnavlink">About Me</a>
+                    <a href="#Projects" class="topnavlink">Projects</a>
+                    <a href="#Let's connect" class="topnavlink">Let's connect</a>
+                    <a href="#Mission" class="topnavlink">Mission</a>
+                </ul>
+        </nav>
     </div>
-  </header>
 
-  <main class="container">
+        <br><br><br><br><br><br><br><br><br><br>
 
-    <!-- 1. About Me (stage 1) -->
-    <section class="stage">
-      <article class="section-box" aria-labelledby="about-heading">
-        <h2 id="about-heading">About Me</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores id esse sequi porro nihil eos numquam eveniet magni nulla natus, harum enim laboriosam distinctio.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum excepturi ab corrupti unde omnis. Ipsam illo debitis vel quasi nesciunt architecto, esse aliquid aut!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, esse aspernatur tempore optio dolores nam veniam autem quaerat deleniti.
-        </p>
-      </article>
-    </section>
+    <header id="Home">
 
-    <!-- 2. Rectangular Photo (stage 2) -->
-    <section class="stage" aria-hidden="false">
-      <div class="photo-rect" role="img" aria-label="Second profile image">
-        <!-- Replace src with your second image path -->
-        <img src="super black panther.jpg" alt="Rectangular profile preview", style="height: 12cm; width: 10cm;">
-        <div class="photo-caption">
-          <strong>Snapshot Project</strong>
-          <p style="margin:6px 0 0 0; color:#3b3b3b;">A mid-page image to add visual depth — replace with a project screenshot or a portrait.</p>
+        
+        <div>
+            
+            <div id = "brief_intro_header" style="float: left; width: 65%; padding-top: 1.5cm;">
+
+                <h3 class="headerintrotext" id="hellothere">Hello there, I'm Umar 👋</h3>
+
+                <h1 class="headerintrotext" id="brief_intro_text">
+                    <big>FULL STACK DEVELOPER</big> <small> &</small> <br><big>ASPIRING AI ENGINEER</big>
+                </h1>
+            </div>
+
+            <div id="headshot" style="display: inline; width: 35%; padding-top: 5cm;">
+                <img src="wallpaper.jpg" alt="A pic to show" id="header-image">
+            </div>
+
+            <h3 style="display: block; clear: both; font-size: larger; color: rgb(0, 109, 252); text-decoration: solid;"><i style="text-decoration: underline;"><big>Scroll for more</big></i> 😄😄💖</h3>
+
+
         </div>
-      </div>
-    </section>
+            
+    </header>
 
-    <!-- 3. Skills and Abilities (stage 3) -->
-    <section class="stage">
-      <article class="section-box" aria-labelledby="skills-heading">
-        <h2 id="skills-heading">Skills & Abilities</h2>
+    <br><br>
 
-        <div style="display:flex; gap:18px; flex-wrap:wrap;">
-          <div style="flex:1; min-width:220px;">
-            <ul style="padding:0; margin:0; list-style:none;">
-              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
-                <strong>Python</strong>
-                <div style="font-size:.92rem; margin-top:6px; color:#444;">
-                  • Web parsing with Beautiful Soup<br>
-                  • Desktop apps with tkinter<br>
-                  • RESTful APIs
+    <main style="background-color: wheat; padding: 1cm; padding-right: 3.5cm;">
+            
+
+        <div id="main-container" style="padding-top: 0.5cm;padding-bottom: 1.5cm;">
+
+
+            <div class="section-box" id="About_me" style="padding-left: 1cm;;">
+
+                <section style="max-width: 50%; padding-left: 1cm; ">
+
+
+                    <h2 class="different-section-headers">About Me</h2>
+
+                    <p style="font-size: larger;"><big>Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>Doloribus eligendi, vel beatae quibusdam nulla odit natus est, a <br> deserunt officia aperiam placeat et laboriosam <br> repudiandae hic aspernatur sint facere tempora!</big></p>
+                    
+
+                </section>
+
+            </div>
+
+            <br><br><br><br>
+
+            <div class="section-box" id="skills/abilities-container">
+
+                <section style="max-width: 880px;">
+
+
+                    <h2 class="different-section-headers">SKILLS / ABILITIES</h2>
+
+                    <p style="font-size: larger"><big>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus eligendi, vel beatae quibusdam nulla odit natus est, a deserunt officia aperiam placeat et laboriosam repudiandae hic aspernatur sint facere tempora!</big></p>
+                
+                </section>
+
+            </div>
+
+            <br><br><br><br>
+
+            <div class="section-box" id="tools-i-use-container" style="padding-left: 1cm;"> 
+
+                <section style="max-width: fit-content;" id="tools-i-use">
+                    
+                    <h2 class="different-section-headers">Tools I Use</h2>
+
+                    <br><br>
+
+                    <span class="badge">Python</span>    
+                    <span class="badge">Beautiful Soup (Web Parsing)</span>    
+                    <span class="badge">tkinter</span>    
+                    <span class="badge">HTML</span>    
+                    <span class="badge">CSS</span>    
+                    <span class="badge">Git</span>    
+                    <span class="badge">GitHub</span>    
+                    <span class="badge">VS Code</span>    
+                    <span class="badge">REST APIs</span>    
+                    <span class="badge">BASH scripting</span>
+                    <span class="badge">Numpy</span>
+                    <span class="badge">Pandas</span>
+
+                </section>
+            </div>
+        
+            <br><br><br><br>
+
+            <div class="section-box" id="projects-made-container">  
+
+                <section style="max-width: 880px;"> 
+                    
+                    <h2 class="different-section-headers">Projects Made</h2>
+
+                    <p style="text-align: left; font-size: larger;"><big>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus eligendi, <br> vel beatae quibusdam nulla odit natus est, a deserunt officia aperiam placeat et laboriosam repudiandae hic aspernatur sint facere tempora!</big></p>
+                    <p style="text-align: left; font-size: larger;"><big>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus eligendi, <br> vel beatae quibusdam nulla odit natus est, a deserunt officia aperiam placeat et laboriosam repudiandae hic aspernatur sint facere tempora!</big></p>
+
+                </section>
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <br><br>
+
+
+    <article style="background-color: wheat; padding-top: 0.05cm; padding-bottom: 0.5cm;">
+
+
+
+        
+        <br>
+
+        <form action="https://formspree.io/f/mpwowaav" method="post" id="form">
+
+            <fieldset>
+
+                <legend style="font-size: 1.8em;"><big>Let me know you came here!</big></legend>
+
+
+                <div style="padding-left: 2cm; text-align: left;">
+                    <label for="username" class="formlabels"><big><i>Enter Your Name</i>:</big></label><br>
+                    <input type="text" name="username" id="username" class="forminputs" required placeholder="*Bob*">
                 </div>
-              </li>
-              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
-                <strong>Web</strong>
-                <div style="font-size:.92rem; color:#444;">HTML, CSS, responsive layouts</div>
-              </li>
-            </ul>
-          </div>
 
-          <div style="flex:1; min-width:220px;">
-            <ul style="padding:0; margin:0; list-style:none;">
-              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
-                <strong>Tools</strong>
-                <div style="font-size:.92rem; color:#444;">Git, VS Code, CLI basics</div>
-              </li>
-              <li style="background:#fbfbff; padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(30,30,60,0.03);">
-                <strong>Problem Solving</strong>
-                <div style="font-size:.92rem; color:#444;">Algorithms, debugging, creative hacks</div>
-              </li>
-            </ul>
-          </div>
+                <br><br>
+
+
+                <div style="padding-left: 5cm; text-align: center;">
+                    <label for="link_from_where" class="formlabels"><big><i>Where did you get the link to my website from</i>:</big></label><br>
+                    <input type="text" name="link_from_where" id="link_from_where" class="forminputs" required placeholder="*Online*">
+                    
+                </div>  
+
+                <br><br>
+
+
+                <div style="padding: 0.5cm;text-align: center; border: 5px solid cyan; width: 25%; font-size: x-large; border-radius: 3cm;">    
+                    <h3>Do you know me in real life</h3>
+
+                    <label for="i_know_you"><big>Yes. I know you</big></label>
+                    <input type="radio" name="know_in_real_life" id="i_know_you" value="True"><br><br>
+
+                    <label for="i_no_know_you"><big>No. I don't know you</big></label>
+                    <input type="radio" name="know_in_real_life" id="i_no_know_you" value="False">
+
+
+                </div>
+
+                <br><br>
+
+                <div style="padding-left: -7cm; text-align: center;">  
+                    <label for="rate_design" class="formlabels"><big><i>Rate the website design from</i> (1 - 10)</big></label><br>
+                    <input type="number" min="0" max="10" name="rate_design" id="rate_design" class="forminputs" required>
+                </div>
+                <br><br>
+
+
+                <button type="submit" style="font-size: 2em; text-align: left; border-radius: 1cm; padding: 0.25cm; box-shadow: 5px 5px 1px;"> Submit </button>
+
+            </fieldset>
+
+        </form>
+    </article>
+
+    <br><br><br>
+
+    <footer>
+        
+        <div style="padding-top: 1cm; padding-left: 1cm; padding-right: 1cm;">
+
+            <div>
+
+
+                <div style="font-size: larger;" id="Let's connect">
+
+                    <h4 style="color: white; padding-left: 5cm;"><big>Let's connect!</big></h4>
+
+                    <a id="email-address" href="mailto:olwonyoumar@gmail.com" style="text-decoration: none; color: cyan; text-align: center;">
+                        <big><h1>olwonyoumar@gmail.com</h1></big>
+                    </a>
+
+                    <h4 style="color: white; text-align: right; padding-right: 3cm;"><big>Can't wait to see you!</big></h4>
+                </div>
+
+                <br><hr>
+
+                <div>
+                
+                    <div style="padding-left: 2.5cm;">
+                        <h1 style="color: lawngreen;"><big><i>Check me out on</i> </big></h1>
+                    </div>
+
+
+                    <div  style="padding-left: 4.5cm; ">
+
+                        <div style="float: left;" class="connect_links">
+                            <a href="https://github.com/Umarpython001" style="color: cyan; text-decoration: none;">
+                                <h1><big>GitHub</big></h1> 
+                            </a>
+                        </div>
+
+                        <h1 style="float: left; color: cyan;"><big>/</big></h1>
+                        
+                        <div style="padding-left: 0.5cm; float: left;" class="connect_links">
+                            <a href="https://github.com/Umarpython001" style="color: cyan; text-decoration: none;">
+                                <h1><big>TikTok</big></h1>
+                            </a>
+                        </div>
+
+                        <h1 style="float: left; color: cyan;"><big>/</big></h1>
+                        
+                        <div style="padding-left: 0.5cm; float: left;" class="connect_links">
+                            <a href="https://github.com/Umarpython001" style="color: cyan; text-decoration: none;">
+                                <h1><big>Discord</big></h1>
+                            </a>
+                        </div>
+
+                        <h1 style="float: left; color: cyan;"><big>/</big></h1>
+                        
+                        <div style="padding-left: 0.5cm; float: left;" class="connect_links">
+                            <a href="https://github.com/Umarpython001" style="color: cyan; text-decoration: none;">
+                                <h1><big>WhatsApp</big></h1>
+                            </a>
+                        </div>
+                        
+                        <h1 style="float: left; color: cyan;"><big>/</big></h1>
+
+                        <div style="padding-left: 0.5cm; float: left;" class="connect_links">
+                            <a href="https://leetcode.com/u/Umarpython001/" style="color: cyan; text-decoration: none;">
+                                <h1><big>LeetCode</big></h1>
+                            </a>
+                        </div>
+                        
+
+                    </div>
+
+                    <h3 style="display: block; clear: both; padding-left: 2.5cm; color: lawngreen;"><i>Hope to see you soon</i> !</h3>
+
+                </div>
+
+                <br><hr>
+
+
+                <div style="padding-right: 3cm; padding-top: 1cm; text-align:right;">
+                    <h4 style="color: white;"><i>THANKS FOR STOPPING BY</i> 😊😁</h4>
+                </div>
+                
+
+
+            </div>
+            
         </div>
 
-      </article>
-    </section>
+        <br><br>
 
-    <!-- 4. Tools I Use (stage 4) -->
-    <section class="stage">
-      <article class="section-box" aria-labelledby="tools-heading">
-        <h2 id="tools-heading">Tools I Use</h2>
+        
+    </footer>
 
-        <div class="skills-list" aria-hidden="false" style="margin-top:8px;">
-          <span class="badge">Python</span>
-          <span class="badge">Beautiful Soup(Web parsing)</span>
-          <span class="badge">tkinter</span>
-          <span class="badge">HTML</span>
-          <span class="badge">BASH</span>
-          <span class="badge">Algorithms and Data Structures</span>
-          <span class="badge">CSS</span>
-          <span class="badge">Git</span>
-          <span class="badge">VS Code</span>
-          <span class="badge">REST APIs</span>
-        </div>
-
-      </article>
-    </section>
-
-    <!-- 5. Mission / Currently Learning (stage 5) -->
-    <section class="stage">
-      <article class="section-box" aria-labelledby="mission-heading">
-        <h2 id="mission-heading">Mission — What I'm Currently Learning</h2>
-        <p><strong>Currently exploring:</strong> data science, full-stack web development, and automation tools.</p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor.
-        </p>
-        <p>I'll replace this placeholder with more specific goals and projects soon.</p>
-      </article>
-    </section>
-
-    <!-- 6. Projects (stage 6) -->
-    <section class="stage">
-      <article class="section-box" aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Projects Made</h2>
-
-        <div class="projects-grid">
-          <div class="project-card">
-            <h3>Portfolio Website</h3>
-            <p>Built with plain HTML and CSS — easy to customize and lightweight.</p>
-          </div>
-
-          <div class="project-card">
-            <h3>Sudoku Solver</h3>
-            <p>Python recursive backtracking solver to auto-solve puzzles quickly.</p>
-          </div>
-
-          <div class="project-card">
-            <h3>Web Parser</h3>
-            <p>A Beautiful Soup-based scraper to extract data from messy web pages.</p>
-          </div>
-
-          <div class="project-card">
-            <h3>To-do App (tkinter)</h3>
-            <p>A local GUI app to manage tasks with save/load functionality.</p>
-          </div>
-        </div>
-
-      </article>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container" style="text-align:center;">
-      <small style="opacity:0.9;">© <strong>Olowonyo Umar Ololade</strong> — 2025</small>
-      <nav aria-label="Social links" style="margin-top:8px;">
-        <ul>
-          <li><a href="https://github.com/Umarpython001">GitHub</a></li>
-          <li><a href="about.html">Discord</a></li>
-          <li><a href="contact.html">YouTube</a></li>
-          <li><a href="mission.html">TikTok</a></li>
-          <li><a href="achievements.html">Mail</a></li>
-          <li><a href="achievements.html">Amala</a></li>
-        </ul>
-      </nav>
+    <div style="background-color: wheat; text-align: center; padding: 3px; border: 2px solid; border-radius: 30px 30px 0 0; margin-top:8px;">
+        <h3 style="opacity:0.9;">© <strong>Olowonyo Umar Ololade</strong> — 2025<br>All rights reserved</h3>
     </div>
-  </footer>
+
+
 </body>
 </html>
-
 
