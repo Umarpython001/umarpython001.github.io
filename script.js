@@ -1,23 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('navContainer');
+    const navbar = document.querySelector('.navbar');
 
     // Handle navbar background change on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navContainer.classList.add('scrolled');
-            document.querySelector('.navbar').classList.add('nav-scrolled');
-        } else {
-            navContainer.classList.remove('scrolled');
-            document.querySelector('.navbar').classList.remove('nav-scrolled');
-        }
-    });
+    const onScroll = () => {
+        const scrolled = window.scrollY > 50;
+        navContainer.classList.toggle('scrolled', scrolled);
+        navbar.classList.toggle('nav-scrolled', scrolled);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     // Smooth scrolling for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -25,4 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Highlight the nav link for the section currently in view
+    const navLinks = document.querySelectorAll('.nav-link');
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+
+        document.querySelectorAll('section[id]').forEach(section => sectionObserver.observe(section));
+    }
 });
